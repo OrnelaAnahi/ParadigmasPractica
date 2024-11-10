@@ -1,0 +1,38 @@
+@startuml vikingos
+
+class Expediciones{
+
+}
+
+class Vikingo{
+    castaSocial
+}
+
+class Soldado{
+
+}
+class Granjero{
+
+}
+
+object jarl{
+
+}
+
+object karl{
+
+}
+
+object thrall{
+
+}
+
+Vikingo --> castaSocial
+jarl ..|> castaSocial
+karl ..|> castaSocial
+thrall ..|> castaSocial
+
+Soldado --|>  Vikingo
+Granjero --|> Vikingo
+
+@enduml

@@ -1,0 +1,80 @@
+@startuml dangerZone
+
+class Empleado {
+   habilidades 
+   salud
+   tipoEmpleado
+
+   tipoEmpleado(nuevoTipo)
+   esIncapacitado()
+   tieneHabilidad(unaHabilidad)
+   puedeUsar(unaHabilidad)
+   recibirDanio(danio)
+   finalizarMision(unaMision)
+   completarMision(unaMision)
+   aprenderHabilidad(habilidad)
+}
+
+object espia {
+    saludCritica() 
+    completarMision(unaMision, empleado) 
+}
+
+object oficinista {
+    cantidadDeEstrellas
+    completarMision(unaMision, empleado) 
+    
+    saludCritica()
+}
+
+class Jefe  {
+    asistentes 
+    tieneHabilidad(unaHabilidad)
+    algunosDeSusEmpleadosPuedeUsar(unaHabilidad)
+}
+
+
+class Mision {
+    habilidadesRequeridas
+    peligrosidad
+    
+    serCumplidaPor(asignado)
+    puedeSerCumplidaPor(asignado) 
+    enseniarHabilidades(empleado) 
+    reuneHabilidadesRequeridas(asignado)
+    habilidadesQueNoPosee(empleado) 
+}
+
+
+object equipo {
+    equipo 
+    
+    tieneHabilidad(unaHabilidad)
+    recibirDanio(danioTotal) 
+    finalizarMision(unaMision)
+}
+
+interface asignado {
+    tieneHabilidad(unaHabilidad)
+    recibirDanio(danioTotal) 
+    finalizarMision(unaMision)
+}
+
+interface tipoEmpleado{
+    completarMision(unaMision, empleado) 
+    saludCritica()
+}
+
+
+Mision ..> asignado
+Jefe --|> Empleado
+equipo ..|> asignado
+Empleado --> tipoEmpleado
+tipoEmpleado  <|.. espia
+tipoEmpleado <|.. oficinista
+Empleado ..|> asignado
+equipo --> "*"  Empleado 
+
+
+@enduml
+
